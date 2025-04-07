@@ -30,23 +30,17 @@ public class SimulationController {
     }
 
     @PostMapping("/simulate")
-    public ResponseEntity<?> simulate(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<?> simulate(@RequestParam("file") MultipartFile file,
+                                      @RequestParam("speed") double speed) {
         try {
-
-
-            // parsowanie  JSONa do Javowego obiektu
             SimulationInput request = objectMapper.readValue(file.getInputStream(), SimulationInput.class);
-
-            SimulationOutput result = simulationService.runSimulation(request);
-
+            SimulationOutput result = simulationService.runSimulation(request, speed);
             objectMapper.writeValue(new File("output.json"), result);
-
-
             return ResponseEntity.ok(result);
-
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Błąd przetwarzania JSON: " + e.getMessage());
         }
     }
+
 }

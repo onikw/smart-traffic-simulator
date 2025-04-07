@@ -35,3 +35,21 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
+
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Pliki systemowe
+.DS_Store
+Thumbs.db
+
+# Pliki wynikowe
+output.json
+*.log
+
