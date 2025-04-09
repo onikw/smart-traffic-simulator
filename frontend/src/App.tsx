@@ -1,4 +1,3 @@
-import React from 'react';
 import SimulationViewer from './components/SimulationViewer';
 import HeaderComponent from './components/HeaderComponent';
 import SimulationMap from './components/SimulationMap';
@@ -21,7 +20,7 @@ function App() {
 
           {/* Prawa kolumna: np. mapa */}
           <section className="flex-grow bg-gray-800 border border-gray-600 m-5 rounded-lg p-4 shadow-lg">
-            <h2 className="text-xl font-semibold mb-2">Mapka / Wizualizacja</h2>
+            <h2 className="text-xl font-semibold mb-2">Wizualizacja</h2>
             <SimulationMap />
           </section>
         </div>

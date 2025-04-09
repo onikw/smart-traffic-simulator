@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class SimulationStepResult {
+public class SimulationStepOutput {
+
     private List<String> leftVehicles = new ArrayList<>();
 
-    public void setNextVehicle(String leftVehicle)
-    {
-        this.leftVehicles.add(leftVehicle);
-    }
 }

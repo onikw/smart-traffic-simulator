@@ -2,96 +2,82 @@ package com.github.onikw.smarttrafficsimulator.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.onikw.smarttrafficsimulator.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.util.*;
+
 
 @Service
+
 public class SimulationService {
 
 
-    private final Map<String, Queue<Vehicle>> roads = new HashMap<>();
+    private final ObjectMapper objectMapper;
+    Junction junction = new Junction();
 
-    private final List<String> directions = List.of("north", "south", "east", "west");
-
-    private int currentGreenRoadIndex = 0;
-
-    public SimulationService() {
-        for (String dir : directions) {
-            roads.put(dir, new LinkedList<>());
-        }
+    @Autowired
+    public SimulationService(ObjectMapper objectMapper)
+    {
+        this.objectMapper = objectMapper;
     }
-    public SimulationOutput runSimulation(SimulationInput input, double speed) {
 
+
+    public SimulationOutput runSimulation(SimulationInput input) {
         SimulationOutput simulationOutput = new SimulationOutput();
         int stepCounter = 1;
 
         for (SimulationCommand command : input.getSimulationInput()) {
+            SimulationStepOutput stepResult = new SimulationStepOutput(); // Służy do zapisywania oczekiwanego outputu(jedynie auta opuszczające skrzyżowanie)
+            SimulationStepDetailed simulationStep = new SimulationStepDetailed();// Zawiera informacje o danym kroku symulacji (przydatne do frontendu)
+
+
             if ("addVehicle".equals(command.getType())) {
-                Vehicle vehicle = new Vehicle(
-                        command.getVehicleId(),
-                        command.getStartRoad(),
-                        command.getEndRoad()
-                );
-                roads.get(vehicle.getStartRoad()).add(vehicle);
+
+                simulationStep.setAction("addVehicle");
+                Vehicle vehicle = addNewWehicle(command);
+                junction.placeVehicle(vehicle);
+                simulationStep.setVehiclesWaiting(junction.getHorizontalCount()+junction.getVerticalCount());
+                simulationStep.setAddedVehicle(vehicle.getVehicleId());
+
+
             }
 
             else if ("step".equals(command.getType())) {
-                SimulationStepResult stepResult = new SimulationStepResult();
+                simulationStep.setAction("step");
 
-                // Zbieramy ID pojazdów oczekujących (opcjonalne — może do debug)
-                for (String dir : directions) {
-                    for (Vehicle vehicle : roads.get(dir)) {
-                        stepResult.setNextVehicle(vehicle.getVehicleId()); // jeśli chcesz przechowywać np. w osobnym polu
-                    }
-                }
+                junction.handleTraffic(simulationStep);
+                stepResult.setLeftVehicles(junction.getPassingVehiclesStrings());
 
-                // Przepuszczamy pojazdy na aktualnie zielonej drodze + drodze naprzeciwko
-                String currentRoad = directions.get(currentGreenRoadIndex);
-                Queue<Vehicle> queue = roads.get(currentRoad);
-                if (!queue.isEmpty()) {
-                    Vehicle v = queue.poll();
-                    stepResult.getLeftVehicles().add(v.getVehicleId());
-                }
 
-                String oppositeRoad = directions.get((currentGreenRoadIndex + 2) % 4);
-                Queue<Vehicle> oppositeQueue = roads.get(oppositeRoad);
-                if (!oppositeQueue.isEmpty()) {
-                    Vehicle v = oppositeQueue.poll();
-                    stepResult.getLeftVehicles().add(v.getVehicleId());
-                }
-
-                // Dodaj wynik kroku do wyniku ogólnego
                 simulationOutput.setNextSimulationStep(stepResult);
-
-                // Zapisz do pliku JSON (dla frontendu)
-                try {
-                    ObjectMapper mapper = new ObjectMapper();
-                    File file = new File("src/main/resources/static/status/step" + stepCounter++ + ".json");
-                    file.getParentFile().mkdirs();
-                    mapper.writeValue(file, stepResult);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                // Delay zgodnie z prędkością symulacji
-                try {
-                    long delayMs = (long) (1000.0 / speed);
-                    Thread.sleep(delayMs);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-
-                rotateLights();
+                simulationStep.setLeftVehicles(junction.getPassingVehiclesStrings());
             }
+
+
+            try {
+                File dir = new File("/tmp/status");
+                if (!dir.exists()) dir.mkdirs();
+
+                File file = new File(dir, "step" + stepCounter++ + ".json");
+                objectMapper.writeValue(file, simulationStep);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         }
 
         return simulationOutput;
     }
 
-
-    private void rotateLights() {
-        currentGreenRoadIndex = (currentGreenRoadIndex + 1) % 2;
+    private Vehicle addNewWehicle(SimulationCommand command) {
+        return new Vehicle(
+                command.getVehicleId(),
+                command.getStartRoad(),
+                command.getEndRoad()
+        );
     }
+
+
 }

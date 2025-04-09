@@ -1,4 +1,4 @@
-import { FaTrafficLight, FaCarSide, FaMapMarkedAlt } from "react-icons/fa";
+import { FaTrafficLight } from "react-icons/fa";
 
 export default function HeaderComponent() {
     return (

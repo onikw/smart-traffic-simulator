@@ -1,6 +1,7 @@
 package com.github.onikw.smarttrafficsimulator.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.github.onikw.smarttrafficsimulator.model.SimulationInput;
 import com.github.onikw.smarttrafficsimulator.model.SimulationOutput;
 import com.github.onikw.smarttrafficsimulator.service.SimulationService;
@@ -27,14 +28,15 @@ public class SimulationController {
     public SimulationController(ObjectMapper objectMapper, SimulationService simulationService) {
         this.objectMapper = objectMapper;
         this.simulationService = simulationService;
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }
 
     @PostMapping("/simulate")
-    public ResponseEntity<?> simulate(@RequestParam("file") MultipartFile file,
-                                      @RequestParam("speed") double speed) {
+    public ResponseEntity<?> simulate(@RequestParam("file") MultipartFile file){
         try {
             SimulationInput request = objectMapper.readValue(file.getInputStream(), SimulationInput.class);
-            SimulationOutput result = simulationService.runSimulation(request, speed);
+            SimulationOutput result = simulationService.runSimulation(request);
             objectMapper.writeValue(new File("output.json"), result);
             return ResponseEntity.ok(result);
         } catch (Exception e) {

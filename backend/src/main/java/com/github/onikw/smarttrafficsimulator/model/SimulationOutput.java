@@ -8,10 +8,10 @@ import java.util.List;
 
 @Data
 public class SimulationOutput {
-    private List<SimulationStepResult> simulationResults= new ArrayList<>();
+    private List<SimulationStepOutput> simulationResults= new ArrayList<>();
 
 
-    public void setNextSimulationStep(SimulationStepResult simulationStepResult)
+    public void setNextSimulationStep(SimulationStepOutput simulationStepResult)
     {
         simulationResults.add(simulationStepResult);
 

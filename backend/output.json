@@ -1,1 +1,21 @@
-{"simulationResults":[{"leftVehicles":["vehicle2","vehicle1","vehicle4","vehicle2"]},{"leftVehicles":["vehicle1","vehicle4","vehicle1","vehicle4"]},{"leftVehicles":["vehicle3","vehicle4"]},{"leftVehicles":["vehicle3","vehicle4","vehicle3"]}]}
+{
+  "simulationResults" : [ {
+    "leftVehicles" : [ "vehicle2", "vehicle1" ]
+  }, {
+    "leftVehicles" : [ "vehicle11" ]
+  }, {
+    "leftVehicles" : [ "vehicle12" ]
+  }, {
+    "leftVehicles" : [ "vehicle13" ]
+  }, {
+    "leftVehicles" : [ "vehicle122" ]
+  }, {
+    "leftVehicles" : [ "vehicle3" ]
+  }, {
+    "leftVehicles" : [ "vehicle132" ]
+  }, {
+    "leftVehicles" : [ "vehicle4" ]
+  }, {
+    "leftVehicles" : [ ]
+  } ]
+}

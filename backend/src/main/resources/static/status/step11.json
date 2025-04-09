@@ -1,0 +1,7 @@
+{
+  "action" : "step",
+  "addedVehicle" : null,
+  "leftVehicles" : [ "vehicle11" ],
+  "vehiclesWaiting" : 6,
+  "vehicleDirections" : [ "vehicle11 z kierunku S do: N" ]
+}
