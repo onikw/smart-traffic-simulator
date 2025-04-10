@@ -12,7 +12,7 @@ Jest również dodatkowa okolicznośc zmiany światła, gdy jedna para dróg prz
 niecierpliwić więc po z góry określonym czasie mogą oni przejechać kosztem zatrzymania ruchu na bardziej obleganej parze dróg.
 
 
-###🔁 Symulacja:
+### 🔁 Symulacja:
 
 1. Użytkownik przesyła plik JSON z komendami (`addVehicle`, `step`).
 2. Backend (Spring Boot):
@@ -31,14 +31,25 @@ niecierpliwić więc po z góry określonym czasie mogą oni przejechać kosztem
 ## 🚀 Uruchomienie projektu
 
 ### ✅ Wersja webowa (frontend + backend)
-aby uruchomić należy po brąć ten plik giyhub
-przejsc do niego 
-odpalic  java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar 
+Aby uruchomić aplikację lokalnie:
 
+    Sklonuj repozytorium z GitHub
+    Pobierz cały projekt na swój komputer za pomocą polecenia:
 
+git clone <link-do-repozytorium>
 
- 
-> Domyślny adres `localhost:8080`
+Przejdź do katalogu projektu
+
+cd smart-traffic-simulator
+
+Uruchom aplikację
+Upewnij się, że projekt został wcześniej zbudowany (komendą ./mvnw clean package w katalogu backend/). Następnie uruchom aplikację:
+
+    java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar
+
+Po kilku sekundach aplikacja będzie dostępna pod adresem:
+👉 http://localhost:8080
+
 
 ---
 
