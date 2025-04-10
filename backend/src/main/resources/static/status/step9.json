@@ -1,0 +1,7 @@
+{
+  "action" : "addVehicle",
+  "addedVehicle" : "vehicle132",
+  "leftVehicles" : [ ],
+  "vehiclesWaiting" : 9,
+  "vehicleDirections" : [ ]
+}
