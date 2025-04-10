@@ -34,11 +34,15 @@ niecierpliwić więc po z góry określonym czasie mogą oni przejechać kosztem
 Aby uruchomić aplikację lokalnie:
 
 Pobierz cały projekt na swój komputer za pomocą polecenia:
- `git clone <link-do-repozytorium>`
+ `git clone <link-do-repozytorium>
+ `
+ 
 Przejdź do katalogu projektu
  `cd smart-traffic-simulator`
+ 
 Zbuduj aplikację
  `./backend/mvnw clean package`
+ 
 Uruchom aplikację
  `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar`
 
@@ -53,11 +57,15 @@ Po kilku sekundach aplikacja będzie dostępna pod adresem:
 Można uruchomić aplikację z dwoma argumentami (plik wejściowy i wyjściowy):
 
 Pobierz cały projekt na swój komputer za pomocą polecenia:
- `git clone <link-do-repozytorium>`
+ `git clone <link-do-repozytorium>
+ `
+ 
 Przejdź do katalogu projektu
  `cd smart-traffic-simulator`
+ 
 Zbuduj aplikację
  `./backend/mvnw clean package`
+ 
 Uruchom aplikację
  `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar <input.json> <output.json>`
 
