@@ -33,22 +33,17 @@ niecierpliwić więc po z góry określonym czasie mogą oni przejechać kosztem
 ### ✅ Wersja webowa (frontend + backend)
 Aby uruchomić aplikację lokalnie:
 
-    Sklonuj repozytorium z GitHub
-    Pobierz cały projekt na swój komputer za pomocą polecenia:
-
-git clone <link-do-repozytorium>
-
+Pobierz cały projekt na swój komputer za pomocą polecenia:
+ `git clone <link-do-repozytorium>`
 Przejdź do katalogu projektu
-
-cd smart-traffic-simulator
-
+ `cd smart-traffic-simulator`
+Zbuduj aplikację
+ `./backend/mvnw clean package`
 Uruchom aplikację
-Upewnij się, że projekt został wcześniej zbudowany (komendą ./mvnw clean package w katalogu backend/). Następnie uruchom aplikację:
-
-    java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar
+ `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar`
 
 Po kilku sekundach aplikacja będzie dostępna pod adresem:
-👉 http://localhost:8080
+ `http://localhost:8080`
 
 
 ---
@@ -57,11 +52,16 @@ Po kilku sekundach aplikacja będzie dostępna pod adresem:
 
 Można uruchomić aplikację z dwoma argumentami (plik wejściowy i wyjściowy):
 
-```bash
-java -jar target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar input.json output.json
-```
+Pobierz cały projekt na swój komputer za pomocą polecenia:
+ `git clone <link-do-repozytorium>`
+Przejdź do katalogu projektu
+ `cd smart-traffic-simulator`
+Zbuduj aplikację
+ `./backend/mvnw clean package`
+Uruchom aplikację
+ `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar <input.json> <output.json>`
 
-Wynik zostanie zapisany w `output.json` (zawiera dane końcowe).
+Wynik zostanie zapisany w podanym pliku wyjściowym `<output.json>`.
 
 ---
 
