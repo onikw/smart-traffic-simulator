@@ -11,7 +11,7 @@ public class JSONServiceConfig {
 
 
     @Bean
-    public ObjectMapper objectMapper() {
+    public static ObjectMapper objectMapper() {
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

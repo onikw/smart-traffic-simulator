@@ -2,19 +2,33 @@ package com.github.onikw.smarttrafficsimulator.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.onikw.smarttrafficsimulator.model.*;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
 
 public class SimulationService {
 
-
+    @Getter
+    private final List<SimulationStepDetailed> savedSteps = new ArrayList<>();
     private final ObjectMapper objectMapper;
     Junction junction = new Junction();
+
+
+    public SimulationService(ObjectMapper objectMapper,String s)
+    {
+        this.objectMapper = objectMapper;
+    }
 
     @Autowired
     public SimulationService(ObjectMapper objectMapper)
@@ -23,9 +37,12 @@ public class SimulationService {
     }
 
 
+
     public SimulationOutput runSimulation(SimulationInput input) {
         SimulationOutput simulationOutput = new SimulationOutput();
         int stepCounter = 1;
+
+        savedSteps.clear();
 
         for (SimulationCommand command : input.getSimulationInput()) {
             SimulationStepOutput stepResult = new SimulationStepOutput(); // Służy do zapisywania oczekiwanego outputu(jedynie auta opuszczające skrzyżowanie)
@@ -55,16 +72,7 @@ public class SimulationService {
             }
 
 
-            try {
-                File dir = new File("/tmp/status");
-                if (!dir.exists()) dir.mkdirs();
-
-                File file = new File(dir, "step" + stepCounter++ + ".json");
-                objectMapper.writeValue(file, simulationStep);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            savedSteps.add(simulationStep); // dodaj do pamięci
 
         }
 

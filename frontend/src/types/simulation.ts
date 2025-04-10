@@ -11,5 +11,5 @@ export interface SimulationVisStep {
     addedVehicle?: string;
     leftVehicles: string[];
     vehiclesWaiting: number;
-    vehicleDirections: string[]; // np. "vehicle1 z: south do north"
+    vehicleDirections: string[];
 }

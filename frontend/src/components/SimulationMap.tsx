@@ -14,7 +14,7 @@ const SimulationMap: React.FC = () => {
 
         const fetchSteps = async (stepNumber: number) => {
             try {
-                const res = await fetch(`/status/step${stepNumber}.json`);
+                const res = await fetch(`/api/steps/${stepNumber}`);
                 if (!res.ok) {
                     console.log(`✅ Koniec symulacji (brak step${stepNumber}.json)`);
                     setIsRunning(false);
