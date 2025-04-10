@@ -3,14 +3,9 @@
 Aplikacja symulująca działanie inteligentnego skrzyżowania z czterema drogami (północ, południe, wschód, zachód). Projekt składa się z backendu w Spring Boot i frontendu w React. Umożliwia uruchomienie symulacji na podstawie pliku JSON oraz jej krokową wizualizację w przeglądarce.
  
 ## ⚙️ Praca sygnalizacji:
-Chcemy aby nasze skrzyżowanie miało wysoką przepustowość i proporcjonalnie "rozładowywało" samochody na każdej z ulic.
+Celem projektu jest optymalizacja pracy sygnalizacji świetlnej skrzyżowania, tak aby zapewnić wysoką przepustowość i efektywne rozłożenie ruchu na każdej z ulic.
 
-Sygnalizacja sprawdza która niekolidująca ze sobą para dróg (wschód-zachód lub północ-południe) zawiera więcej pojazdów. 
-Następnie ustawia tej parze światło zielone a pozostałym drogom czerwone. Światło zmieni się kiedy po przejechaniu pewniej
-liczby pojazdów to na drugiej parze dróg bedzie ich więcej.
-Jest również dodatkowa okolicznośc zmiany światła, gdy jedna para dróg przez długi czas jest "zielona" to ludzie w autach które stoją zaczynają się
-niecierpliwić więc po z góry określonym czasie mogą oni przejechać kosztem zatrzymania ruchu na bardziej obleganej parze dróg.
-
+Zadaniem sygnalizacji jest ustalenie, na której z niekolidujących ze sobą par dróg (wschód-zachód lub północ-południe), znajduje się więcej pojazdów. Właśnie na tej parze dróg sygnalizacja świetlna zmieni barwę na zieloną. Po przejechaniu pewnej liczby pojazdów, dochodzi do zmiany proporcji – więcej pojazdów będzie znajdować się na drogach, których sygnalizacja świetlna uprzednio pozostawała czerwona. Naturalnie, niektóre drogi mogą być częściej uczęszczane. Aby nie bagatelizować kierowców mniej obleganych dróg, przewidziano dodatkową okoliczność zmiany sygnalizacji. Po pewnym, z góry określonym czasie, kierowcy na drogach o mniejszej liczbie pojazdów, będą mogli przejechać kosztem zatrzymania ruchu na bardziej obleganych ulicach.
 
 ### 🔁 Symulacja:
 
