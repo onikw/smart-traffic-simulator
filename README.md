@@ -33,13 +33,13 @@ Pobierz cały projekt na swój komputer za pomocą polecenia:
  `
  
 Przejdź do katalogu projektu
- `cd smart-traffic-simulator`
- 
+ `cd smart-traffic-simulator/backend`
+
 Zbuduj aplikację
- `./backend/mvnw clean package`
+ `./mvnw clean package`
  
 Uruchom aplikację
- `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar`
+ `java -jar target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar`
 
 Po kilku sekundach aplikacja będzie dostępna pod adresem:
  `http://localhost:8080`
@@ -56,13 +56,13 @@ Pobierz cały projekt na swój komputer za pomocą polecenia:
  `
  
 Przejdź do katalogu projektu
- `cd smart-traffic-simulator`
- 
+ `cd smart-traffic-simulator/backend`
+
 Zbuduj aplikację
- `./backend/mvnw clean package`
+ `./mvnw clean package`
  
 Uruchom aplikację
- `java -jar backend/target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar <input.json> <output.json>`
+ `java -jar target/smart-traffic-simulator-0.0.1-SNAPSHOT.jar` <input.json> <output.json>`
 
 Wynik zostanie zapisany w podanym pliku wyjściowym `<output.json>`.
 
